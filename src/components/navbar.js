@@ -4,21 +4,22 @@ import { Link } from 'react-router-dom';
 export default class Navbar extends Component {
     render () {
         return(
-            <nav className="">
-                <Link to="/" className="">Exercise Tracker</Link>
-                <div>
-                    <ul>
-                        <li>
-
+            <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
+                <Link to="/" className="navbar-brand">エクササイズ・メモ</Link>
+                <div className="collapse navbar-collapse">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="navbar-item">
+                            <Link to ="/" className="nav-link">エクササイズ</Link>
                         </li>
-                        <li>
-
+                        <li className="navbar-item">
+                            <Link to ="/create" className="nav-link">エクササイズ　ログ入力</Link>
                         </li>
-                        <li>
-                            
+                        <li className="navbar-item">
+                            <Link to ="/user" className="nav-link">新ユーザー</Link>
                         </li>
                     </ul>
                 </div>
             </nav>
+        )
     }
 }
