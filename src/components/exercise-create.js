@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'
+import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios'
 
 export class ExerciseCreate extends Component {
     constructor(props) {
@@ -22,9 +23,14 @@ export class ExerciseCreate extends Component {
     }
 
     componentDidMount () {
-        this.setState({
-            users: ['test user'],
-            username: 'tes user'
+        axios.get('http://localhost:5000/user/')
+        .then(response => {
+            if (response.data.length > 0) {
+                this.setState({
+                    users: response.data.map(user => user.username),
+                    username: response.data[0].username
+                })
+            }
         })
     }
     
@@ -62,6 +68,9 @@ export class ExerciseCreate extends Component {
         }
         console.log(exercise)
 
+        axios.post('http://localhost:5000/exercise/add', exercise)
+            .then(res => console.log(res.data))
+
         window.location = "/"
     }
 
@@ -97,7 +106,7 @@ export class ExerciseCreate extends Component {
                     />
               </div>
               <div className="form-group">
-                <label>エクササイズ時間 (in minutes): </label>
+                <label>エクササイズ時間 (分): </label>
                 <input 
                     type="text" 
                     className="form-control"
